@@ -17,11 +17,15 @@
 {\end{list}}
 
 \begin{document}
+\title{Vim tips}
 
+\maketitle
 \tableofcontents
-\section*{Text manipulation}
+\newpage
 
-\subsection*{Searching}
+\section{Text manipulation}
+
+\subsection{Searching}
 \begin{center}
 \begin{longtable}{l|l}
 \hline
@@ -60,14 +64,14 @@ Command & Description \\
 \end{longtable}
 \end{center}
 
-\subsubsection*{Search for declaration of subroutine/function under cursor}
+\subsubsection{Search for declaration of subroutine/function under cursor}
 :nmap gx yiw/$\backslash$(sub$\backslash$$<$bar$>$function$\backslash$)$\backslash$s$\backslash$+$<$C-R$>$"$<$CR$>$
 
-\subsubsection*{Search for visually highlighted text}
+\subsubsection{Search for visually highlighted text}
 :vmap $<$silent$>$// y/$<$C-R$>$"$<$CR$>$\\
 :vmap $<$silent$>$ //    y/$<$C-R$>$=escape(@", '$\backslash$$\backslash$/.*\^{}$\sim$[]')$<$CR$>$$<$CR$>$ (with spec chars)
 
-\subsection*{Substitution}
+\subsection{Substitution}
 \begin{center}
 \begin{longtable}{l|l}
  :\%s/fred/joe/igc & general substitute command\\
@@ -110,12 +114,12 @@ Command & Description \\
 \end{longtable}
 \end{center}
 
-\subsubsection*{Filter all form elements into paste register}
+\subsubsection{Filter all form elements into paste register}
 :redir @*$|$sil exec 'g\#$<$$\backslash$(input$\backslash$$|$select$\backslash$$|$textarea$\backslash$$|$/$\backslash$=form$\backslash$)$\backslash$$>$\#p'$|$redir END \\
 :nmap ,z :redir @*sil exec 'g@$<$$\backslash$(input$\backslash$select$\backslash$textarea$\backslash$/$\backslash$=form$\backslash$)$\backslash$$>$@p'redir END
 
 
-\subsubsection*{Substitue within substituion}
+\subsubsection{Substitue within substituion}
 \begin{center}
 \begin{longtable}{l|l}
 :\%s,$\backslash$(all/.*$\backslash$)$\backslash$@$<$=/,\_,g & replace all / with \_ AFTER ``all/''\\
@@ -125,7 +129,7 @@ Command & Description \\
 \end{longtable}
 \end{center}
 
-\subsubsection*{Substituting a visual area}
+\subsubsection{Substituting a visual area}
 \begin{center}
 \begin{longtable}{l|l}
  :'$<$,'$>$s/Emacs/Vim/g & remember you DONT type the '$<$.'$>$\\
@@ -133,7 +137,7 @@ Command & Description \\
 \end{longtable}
 \end{center}
 
-\subsection*{Global command display}
+\subsection{Global command display}
 \begin{center}
 \begin{longtable}{l|l}
  :g/gladiolli/\# & display with line numbers (YOU WANT THIS!)\\
@@ -174,7 +178,7 @@ Command & Description \\
 \end{longtable}
 \end{center}
 
-\subsection*{Global combined with substitute (power editing)}
+\subsection{Global combined with substitute (power editing)}
 \begin{center}
 \begin{longtable}{l|l}
  :'a,'bg/fred/s/joe/susan/gic & can use memory to extend matching\\
@@ -183,7 +187,7 @@ Command & Description \\
 \end{longtable}
 \end{center}
 
-\subsection*{Changing case}
+\subsection{Changing case}
 \begin{center}
 \begin{longtable}{l|l}
 guu & lowercase line\\
@@ -200,7 +204,7 @@ g$<$C-G$>$ & count words in text file
 \end{longtable}
 \end{center}
 
-\subsection*{Reformatting text}
+\subsection{Reformatting text}
 \begin{center}
 \begin{longtable}{l|l}
  gq\} & format a paragraph\\
@@ -211,7 +215,7 @@ g$<$C-G$>$ & count words in text file
 \end{longtable}
 \end{center}
 
-\subsection*{Deletion without destroying buffer}
+\subsection{Deletion without destroying buffer}
 \begin{center}
 \begin{longtable}{l|l}
  ``\_d & what you've ALWAYS wanted\\
@@ -219,7 +223,7 @@ g$<$C-G$>$ & count words in text file
 \end{longtable}
 \end{center}
 
-\subsection*{Essential}
+\subsection{Essential}
 \begin{center}
 \begin{longtable}{l|l}
 * \# g* g\# & find word under cursor () (forwards/backwards)\\
@@ -240,9 +244,9 @@ $<$C-X$>$$<$C-L$>$ & line complete SUPER USEFUL\\
 \end{longtable}
 \end{center}
 
-\section*{File Manipulation}
+\section{File Manipulation}
 
-\subsection*{Exploring}
+\subsection{Exploring}
 \begin{center}
 \begin{longtable}{l|l}
  :Exp(lore) & file explorer (note: capital E)\\
@@ -257,7 +261,7 @@ $<$C-X$>$$<$C-L$>$ & line complete SUPER USEFUL\\
 \end{longtable}
 \end{center}
 
-\subsection*{Opening files \& other tricks}
+\subsection{Opening files \& other tricks}
 \begin{center}
 \begin{longtable}{l|l}
  gf & open file name under cursor (SUPER)\\
@@ -274,7 +278,7 @@ $<$C-X$>$$<$C-L$>$ & line complete SUPER USEFUL\\
 \end{longtable}
 \end{center}
 
-\subsection*{Multiple files management}
+\subsection{Multiple files management}
 \begin{center}
 \begin{longtable}{l|l}
  :bn & goto next buffer\\
@@ -305,7 +309,7 @@ $<$C-X$>$$<$C-L$>$ & line complete SUPER USEFUL\\
  \end{longtable}
 \end{center}
 
-\subsection*{File-name manipulation}
+\subsection{File-name manipulation}
 \begin{center}
 \begin{longtable}{l|l}
  :h filename-modifiers & help\\
@@ -319,7 +323,7 @@ $<$C-X$>$$<$C-L$>$ & line complete SUPER USEFUL\\
 \end{longtable}
 \end{center}
 
-\subsection*{Command over multiple files}
+\subsection{Command over multiple files}
 \begin{center}
 \begin{longtable}{l|l}
  :argdo \%s/foo/bar/e & operate on all files in :args\\
@@ -329,7 +333,7 @@ $<$C-X$>$$<$C-L$>$ & line complete SUPER USEFUL\\
 \end{longtable}
 \end{center}
 
-\subsection*{Sessions (set of files)}
+\subsection{Sessions (set of files)}
 \begin{center}
 \begin{longtable}{l|l}
  gvim file1.c file2.c lib/lib.h lib/lib2.h & load files for ``session''\\
@@ -338,7 +342,7 @@ $<$C-X$>$$<$C-L$>$ & line complete SUPER USEFUL\\
 \end{longtable}
 \end{center}
 
-\subsection*{Modelines}
+\subsection{Modelines}
 \begin{center}
 \begin{longtable}{l|l}
  vim:noai:ts=2:sw=4:readonly: & makes readonly\\
@@ -347,12 +351,12 @@ $<$C-X$>$$<$C-L$>$ & line complete SUPER USEFUL\\
 \end{longtable}
 \end{center}
 
-\subsubsection*{Creating your own GUI Toolbar entry}
+\subsubsection{Creating your own GUI Toolbar entry}
 amenu Modeline.Insert$\backslash$ at$\backslash$ VIMt$\backslash$ modeline $<$Esc$>$$<$Esc$>$ggOvim:ff=unix ts=4 ss=4\\
 $<$CR$>$vim60:fdm=marker$<$Esc$>$gg\\\\
 (All on one line!)
 
-\subsection*{Markers \& moving about}
+\subsection{Markers \& moving about}
 \begin{center}
 \begin{longtable}{l|l}
  '. & jump to last modification line (SUPER)\\
@@ -374,7 +378,7 @@ $<$CR$>$vim60:fdm=marker$<$Esc$>$gg\\\\
  \end{longtable}
 \end{center}
 
-\subsection*{Editing/moving within insert mode}
+\subsection{Editing/moving within insert mode}
 \begin{center}
 \begin{longtable}{l|l}
 $<$C-U$>$                             & delete all entered\\
@@ -385,7 +389,7 @@ $<$C-X$>$$<$C-E$>$,$<$C-X$>$$<$C-Y$>$  & scroll while staying put in insert
 \end{longtable}
 \end{center}
 
-\subsection*{Abbreviations \& maps}
+\subsection{Abbreviations \& maps}
 \begin{center}
 \begin{longtable}{l|l}
 :map $<$f7$>$   :'a,'bw! c:/aaa/x\\
@@ -405,12 +409,12 @@ iab phpdb exit("$<$hr$>$Debug $<$C-R$>$a  "); & yank all variables into register
 \end{longtable}
 \end{center}
 
-\subsubsection*{Display RGB colour under the cursor eg \#445588}
+\subsubsection{Display RGB colour under the cursor eg \#445588}
 :nmap $<$leader$>$c :hi Normal guibg=\#$<$c-r$>$=expand("$<$cword$>$")$<$cr$>$$<$cr$>$
 
-\section*{Registers}
+\section{Registers}
 
-\subsection*{List your registers}
+\subsection{List your registers}
 \begin{center}
 \begin{longtable}{l|l}
 :reg & display contents of all registers\\
@@ -425,7 +429,7 @@ map $<$F11$>$ ``qyy:let @q=@q.''zzz''
 \end{longtable}
 \end{center}
 
-\subsection*{Appending to registers}
+\subsection{Appending to registers}
 
 Yank 5 lines into ``a'' then add a further 5\\
 \begin{enumerate}
@@ -434,7 +438,7 @@ Yank 5 lines into ``a'' then add a further 5\\
 \item ``A5yy
 \end{enumerate}
 
-\subsection*{Using a register as a map (preload registers in .vimrc)}
+\subsection{Using a register as a map (preload registers in .vimrc)}
 \begin{center}
 \begin{longtable}{l|l}
  :let @m='':'a,'bs/''\\
@@ -442,7 +446,7 @@ Yank 5 lines into ``a'' then add a further 5\\
  \end{longtable}
 \end{center}
 
-\subsection*{Redirection \& paste register}
+\subsection{Redirection \& paste register}
 \begin{center}
 \begin{longtable}{l|l}
  :redir @* & redirect commands to paste buffer\\
@@ -457,11 +461,11 @@ Yank 5 lines into ``a'' then add a further 5\\
 \end{longtable}
 \end{center}
 
-\subsubsection*{Copy full path name}
+\subsubsection{Copy full path name}
 unix: nnoremap $<$F2$>$ :let @*=expand(``\%:p'')\\
 win32: nnoremap $<$F2$>$ :let @*=substitute(expand(``\%:p''), ``/'', ``$\backslash$$\backslash$'', ``g'')
 
-\subsection*{Useful tricks}
+\subsection{Useful tricks}
 \begin{center}
 \begin{longtable}{l|l}
  ``ayy@a & execute ``vim command'' in a text file\\
@@ -471,9 +475,9 @@ win32: nnoremap $<$F2$>$ :let @*=substitute(expand(``\%:p''), ``/'', ``$\backsla
  \end{longtable}
 \end{center}
 
-\section*{Advanced}
+\section{Advanced}
 
-\subsection*{Command line tricks}
+\subsection{Command line tricks}
 \begin{center}
 \begin{longtable}{l|l}
 cat xx $|$ gvim - -c ``v/\^{}$\backslash$d$\backslash$d$\backslash$$|$\^{}[3-9]/d `` & filter a stream\\
@@ -497,7 +501,7 @@ do & ``get'' difference under cursor from other file\\
 \end{longtable}
 \end{center}
 
-\subsection*{External programs}
+\subsection{External programs}
 \begin{center}
 \begin{longtable}{l|l}
  :r!ls.exe & reads in output of ls\\
@@ -511,7 +515,7 @@ do & ``get'' difference under cursor from other file\\
  \end{longtable}
 \end{center}
 
-\subsection*{Recording}
+\subsection{Recording}
 \begin{center}
 \begin{longtable}{l|l}
 qq & record to q\\
@@ -527,7 +531,7 @@ nnoremap ] @l:wbd & combining a recording with a map (to end up in command mode)
 \end{longtable}
 \end{center}
 
- \subsubsection*{Operating a Recording on a Visual BLOCK}
+ \subsubsection{Operating a Recording on a Visual BLOCK}
 
  \begin{enumerate}
  \item define recording/register
@@ -553,11 +557,11 @@ nnoremap ] @l:wbd & combining a recording with a map (to end up in command mode)
 
  \end{enumerate}
 
-\subsection*{Quick jumping between splits}
+\subsection{Quick jumping between splits}
 map $<$C-J$>$ $<$C-W$>$j$<$C-W$>$\_ \\
 map $<$C-K$>$ $<$C-W$>$k$<$C-W$>$\_
 
-\subsection*{Visual mode basics}
+\subsection{Visual mode basics}
 \begin{center}
 \begin{longtable}{l|l}
 v & enter visual mode\\
@@ -573,7 +577,7 @@ V\}gJ & join visual block w/o adding spaces\\
 \end{longtable}
 \end{center}
 
-\subsection*{vimrc essentials}
+\subsection{vimrc essentials}
 \begin{center}
 \begin{longtable}{l|l}
 set incsearch & jumps to search word as you type\\
@@ -584,15 +588,15 @@ set browsedir=buffer & make 'open directory' use current directory\\
 \end{longtable}
 \end{center}
 
-\subsubsection*{Launching IE}
+\subsubsection{Launching IE}
 nmap ,f :update:silent !start c:$\backslash$progra$\sim$1$\backslash$intern$\sim$1$\backslash$iexplore.exe \url{file://}\%:p\\
 nmap ,i :update: !start c:$\backslash$progra$\sim$1$\backslash$intern$\sim$1$\backslash$iexplore.exe
 
-\subsubsection*{Ftping from vim}
+\subsubsection{Ftping from vim}
 cmap ,r :Nread \url{ftp://209.51.134.122/public}\_html/index.html\\
 cmap ,w :Nwrite \url{ftp://209.51.134.122/public}\_html/index.html
 
-\subsubsection*{Autocmd}
+\subsubsection{Autocmd}
 \begin{center}
 \begin{longtable}{l|l}
 autocmd bufenter *.tex map $<$F1$>$ :!latex \% & programming keys depending on file type\\
@@ -602,7 +606,7 @@ autocmd BufEnter *.php :\%s/[ $\backslash$t$\backslash$r]$\backslash$+\$//e & sa
 \end{longtable}
 \end{center}
 
-\subsection*{Conventional shifting and indenting}
+\subsection{Conventional shifting and indenting}
 \begin{center}
 \begin{longtable}{l|l}
  :'a,'b$>$$>$ & conventional Shifting/Indenting\\
@@ -615,7 +619,7 @@ autocmd BufEnter *.php :\%s/[ $\backslash$t$\backslash$r]$\backslash$+\$//e & sa
 \end{longtable}
 \end{center}
 
-\subsection*{Pulling objects onto command/search line}
+\subsection{Pulling objects onto command/search line}
 \begin{center}
 \begin{longtable}{l|l}
 $<$C-R$>$$<$C-W$>$ & pull word under the cursor into a command line or search\\
@@ -627,7 +631,7 @@ $<$C-R$>$=somevar           & pull contents of a variable (eg :let sray="ray[0-9
 \end{longtable}
 \end{center}
 
-\subsection*{Capturing output of current script}
+\subsection{Capturing output of current script}
 \begin{center}
 \begin{longtable}{l|l}
  :new $|$ r!perl \# & opens new buffer,read other buffer\\
@@ -637,7 +641,7 @@ $<$C-R$>$=somevar           & pull contents of a variable (eg :let sray="ray[0-9
 \end{longtable}
 \end{center}
 
-\subsection*{Inserting DOS carriage returns}
+\subsection{Inserting DOS carriage returns}
 \begin{center}
 \begin{longtable}{l|l}
  :\%s/\$/$\backslash$\&/g & that's what you type\\
@@ -647,7 +651,7 @@ $<$C-R$>$=somevar           & pull contents of a variable (eg :let sray="ray[0-9
 \end{longtable}
 \end{center}
 
-\subsection*{Perform an action on a particular file or file type}
+\subsection{Perform an action on a particular file or file type}
 autocmd VimEnter c:/intranet/note011.txt normal! ggVGg?\\
 autocmd FileType *.pl exec('set fileformats=unix')\\
 
@@ -656,12 +660,12 @@ i:\\
 `` Retrieving last Search Command for copy \& pasting into text\\
 i/\
 
-\subsection*{Inserting line number}
+\subsection{Inserting line number}
  :g/\^{}/exec ``s/\^{}/''.strpart(line(``.'').'' ``, 0, 4)\\
  :\%s/\^{}/$\backslash$=strpart(line(``.'').'' ``, 0, 5)\\
  :\%s/\^{}/$\backslash$=line('.'). ' '
 
-\subsection*{Numbering lines}
+\subsection{Numbering lines}
 \begin{center}
 \begin{longtable}{l|l}
  :set number & show line numbers\\
@@ -674,7 +678,7 @@ i/\
 \end{longtable}
 \end{center}
 
-\subsection*{Advanced incrementing \footnote{Script required: increment.vim (\url{http://vim.sourceforge.net/tip\_view.php?tip\_id=156})}}
+\subsection{Advanced incrementing}
 
 \begin{code}
 
@@ -687,14 +691,14 @@ i/\
 \end{verbatim}
 \end{code}
 
-\subsubsection*{Create list starting from 223 incrementing by 5 between markers a,b}
+\subsubsection{Create list starting from 223 incrementing by 5 between markers a,b}
 :let I=223\\
 :'a,'bs/\^{}/$\backslash$=INC(5)/
 
-\subsubsection*{Create a map for INC}
+\subsubsection{Create a map for INC}
 cab viminc :let I=223 $\backslash$$|$ 'a,'bs/\$/$\backslash$=INC(5)/
 
-\subsection*{Digraphs (non alpha-numerics)}
+\subsection{Digraphs (non alpha-numerics)}
 \begin{center}
 \begin{longtable}{l|l}
 :digraphs                         & display table\\
@@ -711,7 +715,7 @@ yl/$<$C-R$>$" &  Pull a non-ascii character onto search bar
 \end{longtable}
 \end{center}
 
-\subsection*{Complex vim}
+\subsection{Complex vim}
 \begin{center}
 \begin{longtable}{l|l}
 :\%s/$\backslash$$<$$\backslash$(on$\backslash$$|$off$\backslash$)$\backslash$$>$/$\backslash$=strpart(``offon'', 3 * (``off'' == submatch(0)), 3)/g & swap two words\\
@@ -719,7 +723,7 @@ yl/$<$C-R$>$" &  Pull a non-ascii character onto search bar
 \end{longtable}
 \end{center}
 
-\subsection*{Syntax highlighting}
+\subsection{Syntax highlighting}
 \begin{center}
 \begin{longtable}{l|l}
  :set syntax=perl & force Syntax coloring for a file that has no extension .pl\\
@@ -731,7 +735,7 @@ yl/$<$C-R$>$" &  Pull a non-ascii character onto search bar
 \end{longtable}
 \end{center}
 
-\subsection*{Preventions and security}
+\subsection{Preventions and security}
 \begin{center}
 \begin{longtable}{l|l}
  :set noma (non modifiable) & prevents modifications\\
@@ -740,7 +744,8 @@ yl/$<$C-R$>$" &  Pull a non-ascii character onto search bar
 \end{longtable}
 \end{center}
 
-\subsection*{Taglist \footnote{Script required: taglist.vim (\url{http://www.vim.org/scripts/script.php?script_id=273)}}}
+\subsection{Taglist}
+\footnote{Script required: taglist.vim (\url{http://www.vim.org/scripts/script.php?script_id=273)}}
 \begin{center}
 \begin{longtable}{l|l}
 :Tlist & display tags (list of functions)\\
@@ -748,7 +753,7 @@ $<$C-]$>$  & jump to function under cursor
 \end{longtable}
 \end{center}
 
-\subsection*{Folding}
+\subsection{Folding}
 \begin{center}
 \begin{longtable}{l|l}
  zf\} & fold paragraph using motion\\
@@ -759,14 +764,14 @@ $<$C-]$>$  & jump to function under cursor
 \end{longtable}
 \end{center}
 
-\subsection*{Renaming files}
+\subsection{Renaming files}
  Rename files without leaving vim\\
  :r! ls *.c\\
  :\%s/$\backslash$(.*$\backslash$).c/mv \& $\backslash$1.bla\\
  :w !sh\\
  :q!
 
-\subsection*{Reproducing lines}
+\subsection{Reproducing lines}
 \begin{center}
 \begin{longtable}{l|l}
  imap ] @@@hhkyWjl?@@@P/@@@3s & reproduce previous line word by word\\
@@ -774,14 +779,15 @@ $<$C-]$>$  & jump to function under cursor
 \end{longtable}
 \end{center}
 
-\subsection*{Reading MS-Word documents \footnote{Program required: Antiword (\url{http://www.winfield.demon.nl/})}}
+\subsection{Reading MS-Word documents}
+\footnote{Program required: Antiword (\url{http://www.winfield.demon.nl/})}
  :autocmd BufReadPre *.doc set ro\\
  :autocmd BufReadPre *.doc set hlsearch!\\
  :autocmd BufReadPost *.doc \%!antiword ``\%''
 
-\subsection*{Random functions}
+\subsection{Random functions}
 
-\subsubsection*{Save word under cursor to a file}
+\subsubsection{Save word under cursor to a file}
 
 \begin{code}
 \begin{verbatim}
@@ -792,7 +798,7 @@ $<$C-]$>$  & jump to function under cursor
 \end{verbatim}
 \end{code}
 
-\subsubsection*{Delete duplicate lines}
+\subsubsection{Delete duplicate lines}
 
 \begin{code}
 \begin{verbatim}
@@ -804,7 +810,7 @@ $<$C-]$>$  & jump to function under cursor
 \end{verbatim}
 \end{code}
 
-\subsubsection*{Columnise a CSV file for display}
+\subsubsection{Columnise a CSV file for display}
 :let width = 20\\
 :let fill=' ' $|$ while strlen(fill) $<$ width $|$ let fill=fill.fill $|$ endwhile\\
 :\%s/$\backslash$([\^{};]*$\backslash$);$\backslash$=/$\backslash$=strpart(submatch(1).fill, 0, width)/ge\\
@@ -822,7 +828,7 @@ $<$C-]$>$  & jump to function under cursor
 command! -nargs=1 Csv :call CSVH()\\
 :Csv 5 : highlight fifth column
 
-\subsection*{Miscallaenous commands}
+\subsection{Miscallaenous commands}
 \begin{center}
 \begin{longtable}{l|l}
  :scriptnames & list all plugins, \_vimrcs loaded (super)\\
@@ -832,7 +838,7 @@ command! -nargs=1 Csv :call CSVH()\\
 \end{longtable}
 \end{center}
 
-\subsection*{Vim traps}
+\subsection{Vim traps}
 \begin{list}{}
     \item In regular expressions you must backslash + (match 1 or more)
     \item In regular expressions you must backslash $|$ (or)
@@ -849,7 +855,7 @@ command! -nargs=1 Csv :call CSVH()\\
 \end{longtable}
 \end{center}
 
-\subsection*{Help}
+\subsection{Help}
 \begin{center}
 \begin{longtable}{l|l}
  :h quickref & vim quick reference sheet (ultra)\\
@@ -872,26 +878,28 @@ command! -nargs=1 Csv :call CSVH()\\
 \end{longtable}
 \end{center}
 
-\section*{Fun}
+\section{Fun}
  :h 42\\
  :h holy-grail\\
  :h!\\
  vim -c ``:\%s\%s*\%Cyrnfr)fcbafbe[Oenz(Zbbyranne\%$|$:\%s)[[()])-)Ig$|$norm Vg?''
 
-\section*{Further Information}
-If you liked these please visit \url{http://vim.sourceforge.net/tip_view.php?tip_id=305} and vote for this tip!
+\subsection{Contact}
 
-\subsection*{Contact}
-
-\subsubsection*{Author (David Rayner)}
+\subsubsection{Author (David Rayner)}
 Please email any errors or further tips etc to \url{david(at)rayninfo.co.uk}\\
 Updated version at \url{http://www.rayninfo.co.uk/vimtips.html}
 
-\subsubsection*{Maintainer (Gavin Gilmour)}
-Please email any comments, suggestions including spelling, grammatical and/or formatting issues with this document to \url{gavin(at)brokentrain.net}\\
-Updated version at \url{http://gav.brokentrain.net/projects/vimtips/vimtips.pdf}
+\subsubsection{Maintainer (Gavin Gilmour)}
+Please email any comments, suggestions including spelling, grammatical and/or
+formatting issues with this document to \url{gavin(at)brokentrain.net}\\
+Updated version available at: \url{http://gavin.brokentrain.net/projects/vimtips/vimtips.pdf}
 
-\subsection*{Links}
+\subsubsection{Source}
+The source of this document is available at:
+\url{http://github.com/gaving/vimtips/}.
+
+\subsection{Links}
 \begin{longtable}{l|l}
     \url{http://www.vim.org/} & Official site\\
     \url{http://chronos.cs.msu.su/vim/newsgroup.html} & Newsgroup and Usenet\\
