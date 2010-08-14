@@ -203,8 +203,6 @@ i/\
 
 \subsection{Advanced incrementing}
 
-\begin{code}
-
 \begin{verbatim}
     let g:I=0
     function! INC(increment)
@@ -212,7 +210,6 @@ i/\
         return g:I
      end function
 \end{verbatim}
-\end{code}
 
 \subsubsection{Create list starting from 223 incrementing by 5 between markers a,b}
 :let I=223\\
@@ -314,26 +311,22 @@ $<$C-]$>$  & jump to function under cursor
 
 \subsubsection{Save word under cursor to a file}
 
-\begin{code}
 \begin{verbatim}
     function! SaveWord()
         normal yiw
         exe ':!echo '.@0.' $>$$>$ word.txt'
     endfunction
 \end{verbatim}
-\end{code}
 
 \subsubsection{Delete duplicate lines}
 
-\begin{code}
 \begin{verbatim}
     function! Del()
-        if getline(``.'') == getline(line(``.'') - 1)
+        if getline(".") == getline(line(".") - 1)
             norm dd
         endif
     endfunction
 \end{verbatim}
-\end{code}
 
 \subsubsection{Columnise a CSV file for display}
 :let width = 20\\
@@ -341,14 +334,12 @@ $<$C-]$>$  & jump to function under cursor
 :\%s/$\backslash$([\^{};]*$\backslash$);$\backslash$=/$\backslash$=strpart(submatch(1).fill, 0, width)/ge\\
 :\%s/$\backslash$s$\backslash$+\$//ge
 
-\begin{code}
 \begin{verbatim}
     function! CSVH(x)
         execute 'match Keyword /\^{}$\backslash$([\^{},]*,$\backslash$)$\backslash$\{'.a:x.'\}$\backslash$zs[\^{},]*/'
         execute 'normal \^{}'.a:x.'f,'
     endfunction
 \end{verbatim}
-\end{code}
 
 command! -nargs=1 Csv :call CSVH()\\
 :Csv 5 : highlight fifth column
