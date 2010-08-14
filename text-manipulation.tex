@@ -3,39 +3,34 @@
 \subsection{Searching}
 \begin{center}
 \begin{longtable}{l|l}
-\hline
-Command & Description \\
-\hline
-\endfirsthead
-\endhead
-/joe/e & cursor set to end of match\\
-/joe/e+1 & cursor set to end of match plus 1\\
-/joe/s-2 & cursor set to start of match minus 2\\
-/\^{}joe.*fred.*bill/ & normal\\
-/\^{}[A-J]$\backslash$+/ & search for lines beginning with one or more A-J\\
-/begin$\backslash$\_.*end & search over possible multiple lines\\
-/fred$\backslash$\_s*joe/i & any whitespace including newline\\
-/fred$\backslash$$|$joe & search for fred or joe\\
-/.*fred$\backslash$\&.*joe & search for fred and joe in any order\\
-/$\backslash$$<$fred$\backslash$$>$/i & search for fred but not alfred or frederick\\
-/$\backslash$$<$$\backslash$d$\backslash$d$\backslash$d$\backslash$d$\backslash$$>$ & search for exactly 4 digit numbers\\
-/$\backslash$D$\backslash$d$\backslash$d$\backslash$d$\backslash$d$\backslash$D & search for exactly 4 digit numbers\\
-/$\backslash$$<$$\backslash$d$\backslash$\{4\}$\backslash$$>$ & same thing\\
-/$\backslash$([\^{}0-9]$\backslash$$|$\^{}$\backslash$)\%.*\% & search for absence of a digit or beginning of line\\
-/\^{}$\backslash$n$\backslash$\{3\} & find 3 empty lines\\
-/$\backslash$(fred$\backslash$).*$\backslash$(joe$\backslash$).*$\backslash$2.*$\backslash$1 &  using rexexp memory in a search \\
-/\^{}$\backslash$([\^{},]*,$\backslash$)$\backslash$\{8\} &  using rexexp memory in a search \\
-/$<$$\backslash$zs[\^{}$>$]*$\backslash$ze$>$ & search for tag contents, ignoring chevrons (:h /$\backslash$zs) \\
-/$<$$\backslash$@$<$=[\^{}$>$]*$>$$\backslash$@= & search for tag contents, ignoring chevrons\\
-/$<$$\backslash$@$<$=$\backslash$\_[\^{}$>$]*$>$$\backslash$@= & search for tags across possible multiple lines\\
-/<!--\_p\{-\}--> & search for multiple line comments\\
-/fred$\backslash$\_s*joe/i & any whitespace including newline ($\backslash$\_) \\
-/bugs$\backslash$($\backslash$\_.$\backslash$)*bunny & bugs followed by bunny anywhere in file\\
-:h $\backslash$\_ & help\\
-:bufdo /searchstr/ & multiple file search (use :rewind to recommence search) \\
-:bufdo \%s/searchstr/\&/gic & multiple file search better but cheating (n, then a to stop) \\
-?\url{http://www.vim.org/} & search backwards for a URL without backslashing\\
-/$\backslash$c$\backslash$v([\^{}aeiou]\&$\backslash$a)\{4\} & search for 4 consecutive consonants
+\verb!/joe/e! & cursor set to end of match\\
+\verb!3/joe/e+1! & find 3rd joe cursor set to End of match plus 1\\
+\verb!/joe/s-2! & cursor set to start of match minus 2\\
+\verb!/^joe.*fred.*bill/! & normal\\
+\verb!/^[A-J]\+/! & search for lines beginning with one or more A-J\\
+\verb!/begin\_.*end! & search over possible multiple lines\\
+\verb!/fred\_s*joe/! & any whitespace including newline\\
+\verb!/fred\|joe! & search for fred or joe\\
+\verb!/.*fred\&.*joe! & search for fred and joe in any order\\
+\verb!/\<fred\>/i! & search for fred but not alfred or frederick\\
+\verb!/\<\d\d\d\d\>! & search for exactly 4 digit numbers\\
+\verb!/\D\d\d\d\d\D! & search for exactly 4 digit numbers\\
+\verb!/\<\d\{4}\>! & same thing\\
+\verb!/\([^0-9]\|^\)%.*%! & search for absence of a digit or beginning of line\\
+\verb!/^\n\{3}! & find 3 empty lines\\
+\verb!/\(fred\).*\(joe\).*\2.*\1! &  using rexexp memory in a search \\
+\verb!/^\([^,]*,\)\{8}! & repeating the regexp (rather than what the regexp finds) \\
+\verb!/<\zs[^>]*\ze>! & search for tag contents, ignoring chevrons (\verb!:h /\zs!) \\
+\verb!/<\@<=[^>]*>\@=! & search for tag contents, ignoring chevrons\\
+\verb!/<\@<=\_[^>]*>\@=! & search for tags across possible multiple lines\\
+\verb?/<!--\_p{-}-->? & search for multiple line comments\\
+\verb!/fred\_s*joe/! & any whitespace including newline (\verb!\_!) \\
+\verb!/bugs\(\_.\)*bunny! & bugs followed by bunny anywhere in file\\
+\verb!:h \_! & help\\
+\verb!:bufdo /searchstr/! & multiple file search (use :rewind to recommence search) \\
+\verb!:bufdo %s/searchstr/&/gic! & multiple file search better but cheating (n, then a to stop) \\
+\verb!?http://www.vim.org/! & search backwards for a URL without backslashing\\
+\verb!/\c\v([^aeiou]&\a){4}! & search for 4 consecutive consonants
 \end{longtable}
 \end{center}
 
@@ -58,43 +53,43 @@ with spec chars
 
 \begin{center}
 \begin{longtable}{l|l}
- :\%s/fred/joe/igc & general substitute command\\
- :\%s/$\backslash$r//g & delete dos returns \^{}M\\
- :\%s/$\backslash$r/$\backslash$r/g & turn dos returns \^{}M into real returns (fixes joined lines) \\
- :\%s= *\$== & delete end of line blanks\\
- :\%s= $\backslash$+\$== & same as above\\
- :\%s\#$\backslash$s*$\backslash$r$\backslash$?\$\#\# & clean both trailing spaces AND dos returns\\
- :\%s\#$\backslash$s*$\backslash$r*\$\#\# & same thing deleting empty lines\\
- :\%s/\^{}$\backslash$n$\backslash$\{3\}// & delete blocks of 3 empty lines\\
- :\%s/\^{}$\backslash$n$\backslash$+/$\backslash$r/ & compressing empty lines\\
- :\%s\#$<$[\^{}$>$]$\backslash$+$>$\#\#g & delete html tags, leave text\\
- :'a,'bg/fred/s/dick/joe/igc & VERY USEFUL\\
- :\%s= [\^{} ]$\backslash$+\$=\&\&= & duplicate end column\\
- :\%s= $\backslash$f$\backslash$+\$=\&\&= & same as above\\
- :\%s= $\backslash$S$\backslash$+\$=\&\& & usually the same\\
- :s/$\backslash$(.*$\backslash$):$\backslash$(.*$\backslash$)/$\backslash$2 : $\backslash$1/ & reverse fields separated by :\\
- :\%s/\^{}$\backslash$(.*$\backslash$)$\backslash$n$\backslash$1\$/$\backslash$1/ & delete duplicate lines\\
- :\%s/\^{}.$\backslash$\{-\}pdf/new.pdf/ & delete to 1st pdf only\\
- :\%s\#$\backslash$$<$[zy]$\backslash$?tbl\_[a-z\_]$\backslash$+$\backslash$$>$\#$\backslash$L\&\#gc & lowercase with optional leading characters\\
- :\%s/// & delete possibly multi-line comments\\
- :help /$\backslash$\{-\} & help non-greedy\\
- :s/fred/a/g & sub "fred" with contents of register "a"\\
- :s/fred/$\backslash$=@a/g & better alternative as register not displayed\\
- :\%s/$\backslash$f$\backslash$+$\backslash$.gif$\backslash$$>$/$\backslash$r\&$\backslash$r/g $|$ v/$\backslash$.gif\$/d $|$ \%s/gif/jpg/ & multiple commands on one line\\
- :\%s/a/but/gie$|$:update$|$:next & then use @: to repeat\\
- :\%s/suck$\backslash$$|$buck/loopy/gc & ORing (must break pipe)\\
- :s/\_\_date\_\_/$\backslash$=strftime("\%c")/ & insert datestring\\
- :\%s:$\backslash$($\backslash$($\backslash$w$\backslash$+$\backslash$s$\backslash$+$\backslash$)$\backslash$\{2\}$\backslash$)str1:$\backslash$1str2: & working with columns sub any str1 in col3\\
- :\%s:$\backslash$($\backslash$w$\backslash$+$\backslash$)$\backslash$(.*$\backslash$s$\backslash$+$\backslash$)$\backslash$($\backslash$w$\backslash$+$\backslash$)\$:$\backslash$3$\backslash$2$\backslash$1: & swapping first and last column (4 columns)\\
- :\%s/$\backslash$d$\backslash$+/$\backslash$=(submatch(0)-3)/ & decrement numbers by 3\\
- :g/loc$\backslash$$|$function/s/$\backslash$d/$\backslash$=submatch(0)+6/ & increment numbers by 6 on certain lines only\\
- :\%s\#txtdev$\backslash$zs$\backslash$d\#$\backslash$=submatch(0)+1\#g & better version of above\\
- :\%s/$\backslash$(gg$\backslash$)$\backslash$@$<$=$\backslash$d$\backslash$+/$\backslash$=submatch(0)+6/ & increment only numbers gg$\backslash$d$\backslash$d by 6 (another way)\\
- :let i=10 $|$ 'a,'bg/Abc/s/yy/$\backslash$=i/ $|$let i=i+1 & convert yy to 10,11,12 etc\\
- :let i=10 $|$ 'a,'bg/Abc/s/xx$\backslash$zsyy$\backslash$ze/$\backslash$=i/ $|$let i=i+1 & convert xxyy to xx11,xx12,xx13 (more presise) \\
- :\%s/"$\backslash$([\^{}.]$\backslash$+$\backslash$).*$\backslash$zsxx/$\backslash$1/ & find replacement text, use $\backslash$zs to simplify substitute\\
- :nmap z :\%s\#$\backslash$$<$=expand("")$\backslash$$>$\# & pull word under cursor into LHS of a substitute\\
- :vmap z :\%s/$\backslash$$<$*$\backslash$$>$/ & pull visually highlighted text into LHS of a substitute
+ \verb!:%s/fred/joe/igc! & general substitute command\\
+ \verb!:%s/\r//g! & delete dos returns \verb!^M!\\
+ \verb!:%s/\r/\r/g! & turn dos returns \verb!^M! into real returns (fixes joined lines) \\
+ \verb!:%s= *\$==! & delete end of line blanks\\
+ \verb!:%s= \+\$==! & same as above\\
+ \verb!:%s#\s*\r\?\$##! & clean both trailing spaces AND dos returns\\
+ \verb!:%s#\s*\r*\$##! & same thing deleting empty lines\\
+ \verb!:%s/^\n\{3}//! & delete blocks of 3 empty lines\\
+ \verb!:%s/^\n\+/\r/! & compressing empty lines\\
+ \verb!:%s#<[^>]\+>##g! & delete html tags, leave text\\
+ \verb!:'a,'bg/fred/s/dick/joe/igc! & VERY USEFUL\\
+ \verb!:%s= [^ ]\+\$=&&=! & duplicate end column\\
+ \verb!:%s= \f\+\$=&&=! & same as above\\
+ \verb!:%s= \S\+\$=&&! & usually the same\\
+ \verb!:s/\(.*\):\(.*\)/\2 : \1/! & reverse fields separated by :\\
+ \verb!:%s/^\(.*\)\n\1\$/\1/! & delete duplicate lines\\
+ \verb!:%s/^.\{-}pdf/new.pdf/! & delete to 1st pdf only\\
+ \verb!:%s#\<[zy]\?tbl\_[a-z\_]\+\>#\L&#gc! & lowercase with optional leading characters\\
+ \verb!:%s///! & delete possibly multi-line comments\\
+ \verb!:help /\{-}! & help non-greedy\\
+ \verb!:s/fred/a/g! & sub "fred" with contents of register "a"\\
+ \verb!:s/fred/\=@a/g! & better alternative as register not displayed\\
+ \verb!:%s/\f\+\.gif\>/\r&\r/g | v/\.gif\$/d | %s/gif/jpg/! & multiple commands on one line\\
+ \verb!:%s/a/but/gie|:update|:next! & then use @: to repeat\\
+ \verb!:%s/suck\|buck/loopy/gc! & ORing (must break pipe)\\
+ \verb!:s/\_\_date\_\_/\=strftime("%c")/! & insert datestring\\
+ \verb!:%s:\(\(\w\+\s\+\)\{2}\)str1:\1str2:! & working with columns sub any str1 in col3\\
+ \verb!:%s:\(\w\+\)\(.*\s\+\)\(\w\+\)\$:\3\2\1:! & swapping first and last column (4 columns)\\
+ \verb!:%s/\d\+/\=(submatch(0)-3)/! & decrement numbers by 3\\
+ \verb!:g/loc\|function/s/\d/\=submatch(0)+6/! & increment numbers by 6 on certain lines only\\
+ \verb!:%s#txtdev\zs\d#\=submatch(0)+1#g! & better version of above\\
+ \verb!:%s/\(gg\)\@<=\d\+/\=submatch(0)+6/! & increment only numbers \verb!gg\d\d! by 6 (another way)\\
+ \verb!:let i=10 | 'a,'bg/Abc/s/yy/\=i/ |let i=i+1! & convert yy to 10,11,12 etc\\
+ \verb!:let i=10 | 'a,'bg/Abc/s/xx\zsyy\ze/\=i/ |let i=i+1! & convert xxyy to xx11,xx12,xx13 (more presise) \\
+ \verb!:%s/"\([^.]\+\).*\zsxx/\1/! & find replacement text, use \verb!\zs! to simplify substitute\\
+ \verb!:nmap <leader>z :%s#\<<c-r>=expand("<cword>")<cr>\>#! & pull word under cursor into LHS of a substitute\\
+ \verb!:vmap <leader>z :<C-U>%s/\<<c-r>*\>/! & pull visually highlighted text into LHS of a substitute
 \end{longtable}
 \end{center}
 
@@ -106,128 +101,127 @@ with spec chars
    \ 'g@<\(input\<Bar>select\<Bar>textarea\<Bar>/\=form\)\>@p'<Bar>redir END<CR>
 \end{verbatim}
 
-
 \subsubsection{Substitue within substituion}
 \begin{center}
 \begin{longtable}{l|l}
-:\%s,$\backslash$(all/.*$\backslash$)$\backslash$@$<$=/,\_,g & replace all / with \_ AFTER "all/"\\
-:s\#all/$\backslash$zs.*\#$\backslash$=substitute(submatch(0), '/', '\_', 'g')\# & same thing\\
-:s\#all/\#\&\^{}M\#$|$s\#/\#\_\#g$|$-j! & sub by splitting line, re-joining\\
-:\%s/.*/$\backslash$='cp '.submatch(0).' all/'.substitute(submatch(0),'/','\_','g')/ & sub inside sub
+\verb!:%s,\(all/.*\)\@<=/,_,g! & replace all / with \_ AFTER "all/"\\
+\verb!:s#all/\zs.*#\=substitute(submatch(0), '/', '_', 'g')#! & same thing\\
+\verb!:s#all/#&^M#|s#/#_#g|-j!! & sub by splitting line, re-joining\\
+\verb!:%s/.*/\='cp '.submatch(0).' all/'.substitute(submatch(0),'/','_','g')/! & sub inside sub
 \end{longtable}
 \end{center}
 
 \subsubsection{Substituting a visual area}
 \begin{center}
 \begin{longtable}{l|l}
- :'$<$,'$>$s/Emacs/Vim/g & remember you DONT type the '$<$.'$>$\\
- gv & re-select the previous visual area (ULTRA)
+ \verb!:'<,'>s/Emacs/Vim/g! & remember you DONT type the \verb!'<.'>!\\
+ \verb!gv! & re-select the previous visual area (ULTRA)
 \end{longtable}
 \end{center}
 
 \subsection{Global command display}
 \begin{center}
 \begin{longtable}{l|l}
- :g/gladiolli/\# & display with line numbers (YOU WANT THIS!)\\
- :g/fred.*joe.*dick/ & display all lines fred,joe \& dick\\
- :g/$\backslash$$<$fred$\backslash$$>$/ & display all lines fred but not freddy\\
- :g/\^{}$\backslash$s*\$/d & delete all blank lines\\
- :g!/\^{}dd/d & delete lines not containing string\\
- :v/\^{}dd/d & delete lines not containing string\\
- :g/fred/,/joe/d & not line based (very powerfull)\\
- :g/-------/.-10,.d & delete string \& 10 previous lines\\
- :g/\{/ ,/\}/- s/$\backslash$n$\backslash$+/$\backslash$r/g & delete empty lines but only between \{...\}\\
- :v/$\backslash$S/d & delete empty lines (both types)\\
- :v/./,/./-j & compress empty lines\\
- :g/\^{}\$/,/./-j & compress empty lines\\
- :g/$<$input$\backslash$$|$$<$form/p & ORing\\
- :g/\^{}/put\_ & double space file (pu = put)\\
- :g/\^{}/m0 & reverse file (m = move)\\
- :'a,'b/\^{}/m'b & reverse a section a to b\\
- :g/\^{}/t. & duplicate every line\\
- :g/fred/t\$ & copy lines matching fred to EOF\\
- :g/stage/t'a & copy lines matching stage to marker a\\
- :g/$\backslash$(\^{}I[\^{}\^{}I]*$\backslash$)$\backslash$\{80\}/d & delete all lines containing at least 80 tabs\\
- :'a,'bg/somestr/co/otherstr/ & match all lines containing "somestr" between markers a \& b\\
- :'a,'bg/str1/s/str1/\&\&\&/$|$mo/str2/ & as above but also do a substitution\\
- :\%norm jdd & delete every other line\\
- :.,\$g/\^{}$\backslash$d/exe "norm! $\backslash$"& increment numbers\\
- :'a,'bg/$\backslash$d$\backslash$+/norm! \^{}A & increment numbers\\
- :g/fred/y A & append all lines fred to register a (empty reg a first with qaq.) \\
- :g/fred/y A $|$ :let @*=@a & put into paste buffer\\
- :let @a="$|$g/Barratt/y A $|$:let @*=@a\\
- :'a,'b g/\^{}Error/ . w $>$$>$ errors.txt & write out to errors.txt\\
- :g/./yank$|$put$|$-1s/'/"/g$|$s/.*/Print '\&'/ & duplicate every line in a file wrap a print " around each duplicate\\
- :g/\^{}MARK\$/r tmp.ex $|$ -d & replace string with contents of a file, -d deletes the "mark"\\
- :g//z\#.5 & display with context\\
- :g//z\#.5$|$echo "==========" & display beautifully\\
- :g/$|$/norm 2f$|$r* & replace 2nd $|$ with a star\\
- :nmap  :redir @a:g//:redir END:new:put! a  & send output of previous global command to a new window
+ \verb!:g/gladiolli/#! & display with line numbers (YOU WANT THIS!)\\
+ \verb!:g/fred.*joe.*dick/ & display all lines fred,joe !& dick\\
+ \verb!:g/\<fred\>/! & display all lines fred but not freddy\\
+ \verb!:g/^\s*\$/d! & delete all blank lines\\
+ \verb?:g!/^dd/d? & delete lines not containing string\\
+ \verb!:v/^dd/d! & delete lines not containing string\\
+ \verb!:g/fred/,/joe/d! & not line based (very powerfull)\\
+ \verb!:g/-------/.-10,.d & delete string !& 10 previous lines\\
+ \verb!:g/{/ ,/}/- s/\n\+/\r/g! & delete empty lines but only between {...}\\
+ \verb!:v/\S/d! & delete empty lines (both types)\\
+ \verb!:v/./,/./-j! & compress empty lines\\
+ \verb!:g/^\$/,/./-j! & compress empty lines\\
+ \verb!:g/<input\|<form/p! & ORing\\
+ \verb!:g/^/put_! & double space file (pu = put)\\
+ \verb!:g/^/m0! & reverse file (m = move)\\
+ \verb!:'a,'b/^/m'b! & reverse a section a to b\\
+ \verb!:g/^/t.! & duplicate every line\\
+ \verb!:g/fred/t\$! & copy lines matching fred to EOF\\
+ \verb!:g/stage/t'a! & copy lines matching stage to marker a\\
+ \verb!:g/\(^I[^^I]*\)\{80}/d! & delete all lines containing at least 80 tabs\\
+ \verb!:'a,'bg/somestr/co/otherstr/! & match all lines containing "somestr" between markers a \& b\\
+ \verb!:'a,'bg/str1/s/str1/&&&/|mo/str2/! & as above but also do a substitution\\
+ \verb!:%norm jdd! & delete every other line\\
+ \verb?:.,\$g/^\d/exe "norm! \"? & increment numbers\\
+ \verb?:'a,'bg/\d\+/norm! ^A? & increment numbers\\
+ \verb!:g/fred/y A! & append all lines fred to register a (empty reg a first with qaq.) \\
+ \verb!:g/fred/y A | :let @*=@a! & put into paste buffer\\
+ \verb!:let @a="|g/Barratt/y A |:let @*=@a! & \\
+ \verb!:'a,'b g/^Error/ . w >> errors.txt! & write out to errors.txt\\
+ \verb!:g/./yank|put|-1s/'/"/g|s/.*/Print '&'/! & duplicate every line in a file wrap a print " around each duplicate\\
+ \verb!:g/^MARK\$/r tmp.ex | -d! & replace string with contents of a file, -d deletes the "mark"\\
+ \verb!:g/<pattern>/z#.5! & display with context\\
+ \verb!:g/<pattern>/z#.5|echo "=========="! & display beautifully\\
+ \verb!:g/|/norm 2f|r*! & replace 2nd | with a star\\
+ \verb?:nmap <f3>  :redir @a<cr>:g//<cr>:redir END<cr>:new<cr>:put! a<cr><cr>? & send output of previous global command to a new window
 \end{longtable}
 \end{center}
 
 \subsection{Global combined with substitute (power editing)}
 \begin{center}
 \begin{longtable}{l|l}
- :'a,'bg/fred/s/joe/susan/gic & can use memory to extend matching\\
- :g/fred/,/joe/s/fred/joe/gic & non-line based (ultra)\\
- :/fred/;/joe/-2,/sid/+3s/sally/alley/gIC & find fred before beginning search for joe
+ \verb!:'a,'bg/fred/s/joe/susan/gic! & can use memory to extend matching\\
+ \verb!:g/fred/,/joe/s/fred/joe/gic! & non-line based (ultra)\\
+ \verb!:/fred/;/joe/-2,/sid/+3s/sally/alley/gIC! & find fred before beginning search for joe
 \end{longtable}
 \end{center}
 
 \subsection{Changing case}
 \begin{center}
 \begin{longtable}{l|l}
-guu & lowercase line\\
-gUU & uppercase line\\
-Vu & lowercase line\\
-VU & uppercase line\\
-g$\sim$$\sim$ & flip case line\\
-vEU & upper case word\\
-vE$\sim$ & flip case word\\
-ggguG & lowercase entire file\\
-vmap ,c :s/$\backslash$$<$$\backslash$(.$\backslash$)$\backslash$($\backslash$k*$\backslash$)$\backslash$$>$/$\backslash$u$\backslash$1$\backslash$L$\backslash$2/g & titlise visually selected text (map for .vimrc)\\
-:\%s/[.!?]$\backslash$\_s$\backslash$+$\backslash$a/$\backslash$U\&$\backslash$E/g & uppercase first letter of sentences\\
-g$<$C-G$>$ & count words in text file
+\verb!guu! & lowercase line\\
+\verb!gUU! & uppercase line\\
+\verb!Vu! & lowercase line\\
+\verb!VU! & uppercase line\\
+\verb!g$\sim$$\sim$! & flip case line\\
+\verb!vEU! & upper case word\\
+\verb!vE$\sim$! & flip case word\\
+\verb!ggguG! & lowercase entire file\\
+\verb!vmap ,c :s/\<\(.\)\(\k*\)\>/\u\1\L\2/g! & titlise visually selected text (map for .vimrc)\\
+\verb=:%s/[.!?]\_s\+\a/\U&\E/g= & uppercase first letter of sentences\\
+\verb!g<C-G>! & count words in text file
 \end{longtable}
 \end{center}
 
 \subsection{Reformatting text}
 \begin{center}
 \begin{longtable}{l|l}
- gq\} & format a paragraph\\
- gqap & format a paragraph\\
- ggVGgq & reformat entire file\\
- Vgq & current line\\
- :s/.$\backslash$\{,69$\backslash$\};$\backslash$s*$\backslash$$|$.$\backslash$\{,69$\backslash$\}$\backslash$s$\backslash$+/\&$\backslash$r/g & break lines at 70 chars, if possible after a ';'\\
+ \verb!gq}! & format a paragraph\\
+ \verb!gqap! & format a paragraph\\
+ \verb!ggVGgq! & reformat entire file\\
+ \verb!Vgq! & current line\\
+ \verb!:s/.\{,69\};\s*\|.\{,69\}\s\+/&\r/g! & break lines at 70 chars, if possible after a ';'\\
 \end{longtable}
 \end{center}
 
 \subsection{Deletion without destroying buffer}
 \begin{center}
 \begin{longtable}{l|l}
- "\_d & what you've ALWAYS wanted\\
- "\_dw & delete word (use blackhole)
+ \verb!"_d! & what you've ALWAYS wanted\\
+ \verb!"_dw! & delete word (use blackhole)
 \end{longtable}
 \end{center}
 
 \subsection{Essential}
 \begin{center}
 \begin{longtable}{l|l}
-* \# g* g\# & find word under cursor () (forwards/backwards)\\
-\% & match brackets and tags \{\}, [], (), etc. \\
-. & repeat last modification \\
-@: & repeat last : command (then @@)\\
-$<$C-N$>$$<$C-P$>$ & word completion in insert mode\\
-$<$C-X$>$$<$C-L$>$ & line complete SUPER USEFUL\\
-/$<$C-R$>$$<$C-W$>$ & pull onto search/command line\\
-/$<$C-R$>$$<$C-A$>$ & pull onto search/command line\\
-:set ignorecase & you nearly always want this\\
-:syntax on & colour syntax in perl, HTML, PHP etc. \\
-:h regexp & list all help topics containing regexp (TAB to step through list)\\
-:nmap ,s :source \$VIM/\_vimrc & read from vimrc\\
-:nmap ,v :e \$VIM/\_vimrc & open and edit local vimrc \\
-:vmap sb "zdi$<$b$>$$<$C-R$>$z$<$/b$>$$<$ESC$>$ & wrap $<$b$>$$<$/b$>$ around VISUALLY selected text\\
-:vmap st "zdi$<$?= $<$C-R$>$z ?$>$$<$ESC$>$ & wrap $<$?=   ?$>$ around VISUALLY selected text
+\verb!* # g* g#! & find word under cursor () (forwards/backwards)\\
+\verb!%! & match brackets and tags \{\}, [], (), etc. \\
+\verb!.! & repeat last modification \\
+\verb!@:! & repeat last : command (then @@)\\
+\verb!<C-N><C-P>! & word completion in insert mode\\
+\verb!<C-X><C-L>! & line complete SUPER USEFUL\\
+\verb!/<C-R><C-W>! & pull onto search/command line\\
+\verb!/<C-R><C-A>! & pull onto search/command line\\
+\verb!:set ignorecase! & you nearly always want this\\
+\verb!:syntax on! & colour syntax in perl, HTML, PHP etc. \\
+\verb!:h regexp! & list all help topics containing regexp (TAB to step through list)\\
+\verb!:nmap ,s :source \$VIM/_vimrc! & read from vimrc\\
+\verb!:nmap ,v :e \$VIM/_vimrc! & open and edit local vimrc \\
+\verb!:vmap sb "zdi<b><C-R>z</b><ESC>! & wrap \verb!<b></b>! around VISUALLY selected text\\
+\verb!:vmap st "zdi<?= <C-R>z ?><ESC>! & wrap \verb!<?= ?>! around VISUALLY selected text
 \end{longtable}
 \end{center}

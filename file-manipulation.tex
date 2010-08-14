@@ -3,105 +3,105 @@
 \subsection{Exploring}
 \begin{center}
 \begin{longtable}{l|l}
- :Exp(lore) & file explorer (note: capital E)\\
- :Sex(plore) & file explorer in split window\\
- :ls & list of buffers\\
- :cd .. & move to parent directory\\
- :args & list of files\\
- :lcd \%:p:h & change to directory of current file\\
- :autocmd BufEnter * lcd \%:p:h & change to directory of current file automatically \footnote{Script required: bufexplorer.vim \url{http://www.vim.org/script.php?script}\_id=42} (put in \_vimrc)\\
- $\backslash$be & buffer explorer list of buffers\\
- $\backslash$bs & buffer explorer (split window)
+ \verb!:Exp(lore)! & file explorer (note: capital E)\\
+ \verb!:Sex(plore)! & file explorer in split window\\
+ \verb!:ls! & list of buffers\\
+ \verb!:cd ..! & move to parent directory\\
+ \verb!:args! & list of files\\
+ \verb!:lcd %:p:h! & change to directory of current file\\
+ \verb!:autocmd BufEnter * lcd %:p:h! & change to directory of current file automatically \footnote{Script required: bufexplorer.vim \url{http://www.vim.org/script.php?script\_id=42}}\\
+ \verb!\be! & buffer explorer list of buffers\\
+ \verb!\bs! & buffer explorer (split window)
 \end{longtable}
 \end{center}
 
 \subsection{Opening files \& other tricks}
 \begin{center}
 \begin{longtable}{l|l}
- gf & open file name under cursor (SUPER)\\
- :nnoremap gF :view  & open file under cursor, create if necessary\\
- ga & display hex,ascii value of char under cursor\\
- ggVGg? & rot13 whole file\\
- ggg?G & rot13 whole file (quicker for large file)\\
- :8 $|$ normal VGg? & rot13 from line 8\\
- :normal 10GVGg? & rot13 from line 8\\
- , & increment, decrement number under cursor\\
- =5*5 & insert 25 into text (mini-calculator)\\
- :e main\_ & tab completes\\
- main\_ & include NAME of file in text (insert mode)
+ \verb!gf! & open file name under cursor (SUPER)\\
+ \verb!:nnoremap gF :view ! & open file under cursor, create if necessary\\
+ \verb!ga! & display hex,ascii value of char under cursor\\
+ \verb!ggVGg?! & rot13 whole file\\
+ \verb!ggg?G! & rot13 whole file (quicker for large file)\\
+ \verb!:8 | normal VGg?! & rot13 from line 8\\
+ \verb!:normal 10GVGg?! & rot13 from line 8\\
+ \verb!<c-a>,<c-x>! & increment, decrement number under cursor\\
+ \verb!<c-r>=5*5! & insert 25 into text (mini-calculator)\\
+ \verb!:e main_<tab>! & tab completes\\
+ \verb!main_<c-x><c-f>! & include NAME of file in text (insert mode)
 \end{longtable}
 \end{center}
 
 \subsection{Multiple files management}
 \begin{center}
 \begin{longtable}{l|l}
- :bn & goto next buffer\\
- :bp & goto previous buffer\\
- :wn & save file and move to next (super)\\
- :wp & save file and move to previous\\
- :bd & remove file from buffer list (super)\\
- :bun & buffer unload (remove window but not from list)\\
- :badd file.c & file from buffer list\\
- :b 3 & go to buffer 3\\
- :b main & go to buffer with main in name eg main.c (ultra)\\
- :sav php.html & save current file as php.html and "move" to php.html\\
- :sav! \%$<$.bak & save current file to alternative extension (old way)\\
- :sav! \%:r.cfm & save current file to alternative extension\\
- :sav \%:s/fred/joe/ & do a substitute on file name\\
- :sav \%:s/fred/joe/:r.bak2 & do a substitute on file name \& ext.\\
- :!mv \% \%:r.bak & rename current file (DOS use rename or del)\\
- :e! & return to unmodified file\\
- :w c:/aaa/\% & save file elsewhere\\
- :e \# & edit alternative file (also cntrl-\^{})\\
- :rew & return to beginning of edited files list (:args)\\
- :brew & buffer rewind\\
- :sp fred.txt & open fred.txt into a split\\
- :sball,:sb & split all buffers (super)\\
- :scrollbind & in each split window\\
- :map $<$F5$>$ :ls$<$CR$>$:e \# & pressing F5 lists all buffers, just type number\\
- :set hidden & allows to change buffer w/o saving current buffer
+ \verb!:bn! & goto next buffer\\
+ \verb!:bp! & goto previous buffer\\
+ \verb!:wn! & save file and move to next (super)\\
+ \verb!:wp! & save file and move to previous\\
+ \verb!:bd! & remove file from buffer list (super)\\
+ \verb!:bun! & buffer unload (remove window but not from list)\\
+ \verb!:badd file.c! & file from buffer list\\
+ \verb!:b 3! & go to buffer 3\\
+ \verb!:b main! & go to buffer with main in name eg main.c (ultra)\\
+ \verb!:sav php.html! & save current file as php.html and "move" to php.html\\
+ \verb?:sav! %<.bak? & save current file to alternative extension (old way)\\
+ \verb?:sav! %:r.cfm? & save current file to alternative extension\\
+ \verb!:sav %:s/fred/joe/! & do a substitute on file name\\
+ \verb!:sav %:s/fred/joe/:r.bak2! & do a substitute on file name \& ext.\\
+ \verb?:!mv % %:r.bak? & rename current file (DOS use rename or del)\\
+ \verb?:e!? & return to unmodified file\\
+ \verb!:w c:/aaa/%! & save file elsewhere\\
+ \verb!:e #! & edit alternative file (also \verb!ctrl-^!)\\
+ \verb!:rew! & return to beginning of edited files list (:args)\\
+ \verb!:brew! & buffer rewind\\
+ \verb!:sp fred.txt! & open fred.txt into a split\\
+ \verb!:sball,:sb! & split all buffers (super)\\
+ \verb!:scrollbind! & in each split window\\
+ \verb!:map <F5> :ls<CR>:e #! & pressing F5 lists all buffers, just type number\\
+ \verb!:set hidden! & allows to change buffer w/o saving current buffer
  \end{longtable}
 \end{center}
 
 \subsection{File-name manipulation}
 \begin{center}
 \begin{longtable}{l|l}
- :h filename-modifiers & help\\
- :w \% & write to current file name\\
- :w \%:r.cfm & change file extention to .cfm\\
- :!echo \%:p & full path \& file name\\
- :!echo \%:p:h & full path only\\
- $<$C-R$>$\% & insert filename (insert mode)\\
- "\%p & insert filename (normal mode)\\
- /$<$C-R$>$\% & search for file name in text
+ \verb!:h filename-modifiers! & help\\
+ \verb!:w %! & write to current file name\\
+ \verb!:w %:r.cfm! & change file extention to .cfm\\
+ \verb?:!echo %:p? & full path \& file name\\
+ \verb?:!echo %:p:h? & full path only\\
+ \verb!<C-R>%! & insert filename (insert mode)\\
+ \verb!"%p! & insert filename (normal mode)\\
+ \verb!/<C-R>%! & search for file name in text
 \end{longtable}
 \end{center}
 
 \subsection{Command over multiple files}
 \begin{center}
 \begin{longtable}{l|l}
- :argdo \%s/foo/bar/e & operate on all files in :args\\
- :bufdo \%s/foo/bar/e\\
- :windo \%s/foo/bar/e\\
- :argdo exe '\%!sort'$|$w! & include an external command
+ \verb!:argdo %s/foo/bar/e! & operate on all files in :args\\
+ \verb!:bufdo %s/foo/bar/e! & operate on all buffers\\
+ \verb!:windo %s/foo/bar/e! & operate on all windows\\
+ \verb?:argdo exe '%!sort'|w!? & include an external command
 \end{longtable}
 \end{center}
 
 \subsection{Sessions (set of files)}
 \begin{center}
 \begin{longtable}{l|l}
- gvim file1.c file2.c lib/lib.h lib/lib2.h & load files for "session"\\
- :mksession & create a session file (default session.vim)\\
- gvim -S Session.vim & reload all files
+ \verb!gvim file1.c file2.c lib/lib.h lib/lib2.h! & load files for "session"\\
+ \verb!:mksession! & create a session file (default session.vim)\\
+ \verb!gvim -S Session.vim! & reload all files
 \end{longtable}
 \end{center}
 
 \subsection{Modelines}
 \begin{center}
 \begin{longtable}{l|l}
- vim:noai:ts=2:sw=4:readonly: & makes readonly\\
- vim:ft=html: & says use HTML syntax highlighting\\
- :h modeline & help with modelines
+ \verb!vim:noai:ts=2:sw=4:readonly:! & makes readonly\\
+ \verb!vim:ft=html:! & says use HTML syntax highlighting\\
+ \verb!:h modeline! & help with modelines
 \end{longtable}
 \end{center}
 
@@ -115,53 +115,55 @@ amenu  Modeline.Insert\ a\ VIM\ modeline
 \subsection{Markers \& moving about}
 \begin{center}
 \begin{longtable}{l|l}
- '. & jump to last modification line (SUPER)\\
- `. & jump to exact spot in last modification line\\
- g; & cycle through recent changes (oldest first) \footnote{(new in vim 6.3)}\\
- g, & reverse direction \footnote{(new in vim 6.3)}\\
- :changes & show entire list of changes\\
- :h changelist & help for above\\
- $<$C-O$>$ & retrace your movements in file (starting from most recent)\\
- $<$C-I$>$ & retrace your movements in file (reverse direction)\\
- :ju(mps) & list of your movements\\
- :help jump-motions & explains jump motions\\
- :history & list of all your commands\\
- :his c & commandline history\\
- :his s & search history\\
- q/ & search history window (puts you in full edit mode)\\
- q: & commandline history window (puts you in full edit mode)\\
- : & history Window
+ \verb!'.! & jump to last modification line (SUPER)\\
+ \verb!`.! & jump to exact spot in last modification line\\
+ \verb!g;! & cycle through recent changes (oldest first) \footnote{(new in vim 6.3)}\\
+ \verb!g,! & reverse direction \footnote{(new in vim 6.3)}\\
+ \verb!:changes! & show entire list of changes\\
+ \verb!:h changelist! & help for above\\
+ \verb!<C-O>! & retrace your movements in file (starting from most recent)\\
+ \verb!<C-I>! & retrace your movements in file (reverse direction)\\
+ \verb!:ju(mps)! & list of your movements\\
+ \verb!:help jump-motions! & explains jump motions\\
+ \verb!:history! & list of all your commands\\
+ \verb!:his c! & commandline history\\
+ \verb!:his s! & search history\\
+ \verb!q/! & search history window (puts you in full edit mode)\\
+ \verb!q:! & commandline history window (puts you in full edit mode)\\
+ \verb!:! & history Window
  \end{longtable}
 \end{center}
 
 \subsection{Editing/moving within insert mode}
 \begin{center}
 \begin{longtable}{l|l}
-$<$C-U$>$                             & delete all entered\\
-$<$C-W$>$                             & delete last word\\
-$<$HOME$>$$<$END$>$                   & beginning/end of line\\
-$<$C-LEFTARROW$>$$<$C-RIGHTARROW$>$   & jump one word backwards/forwards\\
-$<$C-X$>$$<$C-E$>$,$<$C-X$>$$<$C-Y$>$  & scroll while staying put in insert
+\verb!<C-U>! & delete all entered\\
+\verb!<C-W>! & delete last word\\
+\verb!<HOME><END>! & beginning/end of line\\
+\verb!<C-LEFTARROW><C-RIGHTARROW>! & jump one word backwards/forwards\\
+\verb!<C-X><C-E>,<C-X><C-Y>! & scroll while staying put in insert
 \end{longtable}
 \end{center}
 
 \subsection{Abbreviations \& maps}
+\begin{verbatim}
+:map <f7>   :'a,'bw! c:/aaa/x
+:map <f8>   :r c:/aaa/x
+:map <f11>  :.w! c:/aaa/xr<CR>
+:map <f12>  :r c:/aaa/xr<CR>
+\end{verbatim}
 \begin{center}
 \begin{longtable}{l|l}
-:map $<$f7$>$   :'a,'bw! c:/aaa/x\\
-:map $<$f8$>$   :r c:/aaa/x\\
-:map $<$f11$>$  :.w! c:/aaa/xr$<$CR$>$\\
-:map $<$f12$>$  :r c:/aaa/xr$<$CR$>$\\
-:ab php & list of abbreviations beginning php\\
-:map , & list of maps beginning ,\\
-set wak=no & allow use of F10 for win32 mapping (:h winaltkeys)\\
-$<$CR$>$             & enter\\
-$<$ESC$>$            & escape\\
-$<$BACKSPACE$>$      & backspace\\
-$<$LEADER$>$         & backslash\\
-$<$BAR$>$            & $|$\\
-$<$SILENT$>$         & execute quietly\\
-iab phpdb exit("$<$hr$>$Debug $<$C-R$>$a  "); & yank all variables into register a
+\verb!:ab php! & list of abbreviations beginning php\\
+\verb!:map ,! & list of maps beginning ,\\
+\verb!set wak=no! & allow use of F10 for win32 mapping (:h winaltkeys)\\
+\verb!<CR>! & enter\\
+\verb!<ESC>! & escape\\
+\verb!<BACKSPACE>! & backspace\\
+\verb!<LEADER>! & backslash\\
+\verb!<BAR>! & |\\
+\verb!<SILENT>! & execute quietly\\
+\verb!iab phpdb exit("<hr>Debug <C-R>a  ");! & yank all variables into register a
 \end{longtable}
 \end{center}
 
