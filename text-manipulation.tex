@@ -69,12 +69,12 @@ Command & Description \\
  :\%s\#$\backslash$$<$[zy]$\backslash$?tbl\_[a-z\_]$\backslash$+$\backslash$$>$\#$\backslash$L\&\#gc & lowercase with optional leading characters\\
  :\%s/// & delete possibly multi-line comments\\
  :help /$\backslash$\{-\} & help non-greedy\\
- :s/fred/a/g & sub ``fred'' with contents of register ``a''\\
+ :s/fred/a/g & sub "fred" with contents of register "a"\\
  :s/fred/$\backslash$=@a/g & better alternative as register not displayed\\
  :\%s/$\backslash$f$\backslash$+$\backslash$.gif$\backslash$$>$/$\backslash$r\&$\backslash$r/g $|$ v/$\backslash$.gif\$/d $|$ \%s/gif/jpg/ & multiple commands on one line\\
  :\%s/a/but/gie$|$:update$|$:next & then use @: to repeat\\
  :\%s/suck$\backslash$$|$buck/loopy/gc & ORing (must break pipe)\\
- :s/\_\_date\_\_/$\backslash$=strftime(``\%c'')/ & insert datestring\\
+ :s/\_\_date\_\_/$\backslash$=strftime("\%c")/ & insert datestring\\
  :\%s:$\backslash$($\backslash$($\backslash$w$\backslash$+$\backslash$s$\backslash$+$\backslash$)$\backslash$\{2\}$\backslash$)str1:$\backslash$1str2: & working with columns sub any str1 in col3\\
  :\%s:$\backslash$($\backslash$w$\backslash$+$\backslash$)$\backslash$(.*$\backslash$s$\backslash$+$\backslash$)$\backslash$($\backslash$w$\backslash$+$\backslash$)\$:$\backslash$3$\backslash$2$\backslash$1: & swapping first and last column (4 columns)\\
  :\%s/$\backslash$d$\backslash$+/$\backslash$=(submatch(0)-3)/ & decrement numbers by 3\\
@@ -83,8 +83,8 @@ Command & Description \\
  :\%s/$\backslash$(gg$\backslash$)$\backslash$@$<$=$\backslash$d$\backslash$+/$\backslash$=submatch(0)+6/ & increment only numbers gg$\backslash$d$\backslash$d by 6 (another way)\\
  :let i=10 $|$ 'a,'bg/Abc/s/yy/$\backslash$=i/ $|$let i=i+1 & convert yy to 10,11,12 etc\\
  :let i=10 $|$ 'a,'bg/Abc/s/xx$\backslash$zsyy$\backslash$ze/$\backslash$=i/ $|$let i=i+1 & convert xxyy to xx11,xx12,xx13 (more presise) \\
- :\%s/''$\backslash$([\^{}.]$\backslash$+$\backslash$).*$\backslash$zsxx/$\backslash$1/ & find replacement text, use $\backslash$zs to simplify substitute\\
- :nmap z :\%s\#$\backslash$$<$=expand(``'')$\backslash$$>$\# & pull word under cursor into LHS of a substitute\\
+ :\%s/"$\backslash$([\^{}.]$\backslash$+$\backslash$).*$\backslash$zsxx/$\backslash$1/ & find replacement text, use $\backslash$zs to simplify substitute\\
+ :nmap z :\%s\#$\backslash$$<$=expand("")$\backslash$$>$\# & pull word under cursor into LHS of a substitute\\
  :vmap z :\%s/$\backslash$$<$*$\backslash$$>$/ & pull visually highlighted text into LHS of a substitute
 \end{longtable}
 \end{center}
@@ -97,7 +97,7 @@ Command & Description \\
 \subsubsection{Substitue within substituion}
 \begin{center}
 \begin{longtable}{l|l}
-:\%s,$\backslash$(all/.*$\backslash$)$\backslash$@$<$=/,\_,g & replace all / with \_ AFTER ``all/''\\
+:\%s,$\backslash$(all/.*$\backslash$)$\backslash$@$<$=/,\_,g & replace all / with \_ AFTER "all/"\\
 :s\#all/$\backslash$zs.*\#$\backslash$=substitute(submatch(0), '/', '\_', 'g')\# & same thing\\
 :s\#all/\#\&\^{}M\#$|$s\#/\#\_\#g$|$-j! & sub by splitting line, re-joining\\
 :\%s/.*/$\backslash$='cp '.submatch(0).' all/'.substitute(submatch(0),'/','\_','g')/ & sub inside sub
@@ -135,19 +135,19 @@ Command & Description \\
  :g/fred/t\$ & copy lines matching fred to EOF\\
  :g/stage/t'a & copy lines matching stage to marker a\\
  :g/$\backslash$(\^{}I[\^{}\^{}I]*$\backslash$)$\backslash$\{80\}/d & delete all lines containing at least 80 tabs\\
- :'a,'bg/somestr/co/otherstr/ & match all lines containing ``somestr'' between markers a \& b\\
+ :'a,'bg/somestr/co/otherstr/ & match all lines containing "somestr" between markers a \& b\\
  :'a,'bg/str1/s/str1/\&\&\&/$|$mo/str2/ & as above but also do a substitution\\
  :\%norm jdd & delete every other line\\
- :.,\$g/\^{}$\backslash$d/exe ``norm! $\backslash$''& increment numbers\\
+ :.,\$g/\^{}$\backslash$d/exe "norm! $\backslash$"& increment numbers\\
  :'a,'bg/$\backslash$d$\backslash$+/norm! \^{}A & increment numbers\\
  :g/fred/y A & append all lines fred to register a (empty reg a first with qaq.) \\
  :g/fred/y A $|$ :let @*=@a & put into paste buffer\\
- :let @a=''$|$g/Barratt/y A $|$:let @*=@a\\
+ :let @a="$|$g/Barratt/y A $|$:let @*=@a\\
  :'a,'b g/\^{}Error/ . w $>$$>$ errors.txt & write out to errors.txt\\
- :g/./yank$|$put$|$-1s/'/''/g$|$s/.*/Print '\&'/ & duplicate every line in a file wrap a print '' around each duplicate\\
- :g/\^{}MARK\$/r tmp.ex $|$ -d & replace string with contents of a file, -d deletes the ``mark''\\
+ :g/./yank$|$put$|$-1s/'/"/g$|$s/.*/Print '\&'/ & duplicate every line in a file wrap a print " around each duplicate\\
+ :g/\^{}MARK\$/r tmp.ex $|$ -d & replace string with contents of a file, -d deletes the "mark"\\
  :g//z\#.5 & display with context\\
- :g//z\#.5$|$echo ``=========='' & display beautifully\\
+ :g//z\#.5$|$echo "==========" & display beautifully\\
  :g/$|$/norm 2f$|$r* & replace 2nd $|$ with a star\\
  :nmap  :redir @a:g//:redir END:new:put! a  & send output of previous global command to a new window
 \end{longtable}
@@ -193,8 +193,8 @@ g$<$C-G$>$ & count words in text file
 \subsection{Deletion without destroying buffer}
 \begin{center}
 \begin{longtable}{l|l}
- ``\_d & what you've ALWAYS wanted\\
- ``\_dw & delete word (use blackhole)
+ "\_d & what you've ALWAYS wanted\\
+ "\_dw & delete word (use blackhole)
 \end{longtable}
 \end{center}
 

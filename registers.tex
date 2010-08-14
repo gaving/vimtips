@@ -5,30 +5,30 @@
 \begin{longtable}{l|l}
 :reg & display contents of all registers\\
 :reg a & display content of individual registers\\
-``1p.... & retrieve numeric registers one by one\\
-:let @y='yy@''' & pre-loading registers (put in .vimrc)\\
-qqq & empty register ``q''\\
+"1p.... & retrieve numeric registers one by one\\
+:let @y='yy@"' & pre-loading registers (put in .vimrc)\\
+qqq & empty register "q"\\
 :let @a=@\_ & clear register a\\
-:let @a=''`` & clear register a\\
+:let @a="" & clear register a\\
 :let @*=@a & copy register a to paste buffer\\
-map $<$F11$>$ ``qyy:let @q=@q.''zzz''
+map $<$F11$>$ "qyy:let @q=@q."zzz"
 \end{longtable}
 \end{center}
 
 \subsection{Appending to registers}
 
-Yank 5 lines into ``a'' then add a further 5\\
+Yank 5 lines into "a" then add a further 5\\
 \begin{enumerate}
-\item ``a5yy
+\item "a5yy
 \item 10j
-\item ``A5yy
+\item "A5yy
 \end{enumerate}
 
 \subsection{Using a register as a map (preload registers in .vimrc)}
 \begin{center}
 \begin{longtable}{l|l}
- :let @m='':'a,'bs/''\\
- :let @s='':\%!sort -u''
+ :let @m=":'a,'bs/"\\
+ :let @s=":\%!sort -u"
  \end{longtable}
 \end{center}
 
@@ -38,25 +38,25 @@ Yank 5 lines into ``a'' then add a further 5\\
  :redir @* & redirect commands to paste buffer\\
  :redir END & end redirect\\
  :redir $>$$>$ out.txt & redirect to a file\\
- ``*yy & yank to paste\\
- ``*p & insert from paste buffer\\
+ "*yy & yank to paste\\
+ "*p & insert from paste buffer\\
  :'a,'by* & yank range into paste\\
  :\%y* & yank whole buffer into paste\\
  :.y* & yank current line to paster\\
- :nmap p :let @* = substitute(@*,'[\^{}[:print:]]','','g')''*p & filter non-printable characters\
+ :nmap p :let @* = substitute(@*,'[\^{}[:print:]]',",'g')"*p & filter non-printable characters\
 \end{longtable}
 \end{center}
 
 \subsubsection{Copy full path name}
-unix: nnoremap $<$F2$>$ :let @*=expand(``\%:p'')\\
-win32: nnoremap $<$F2$>$ :let @*=substitute(expand(``\%:p''), ``/'', ``$\backslash$$\backslash$'', ``g'')
+unix: nnoremap $<$F2$>$ :let @*=expand("\%:p")\\
+win32: nnoremap $<$F2$>$ :let @*=substitute(expand("\%:p"), "/", "$\backslash$$\backslash$", "g")
 
 \subsection{Useful tricks}
 \begin{center}
 \begin{longtable}{l|l}
- ``ayy@a & execute ``vim command'' in a text file\\
- yy@'' & same thing using unnamed register\\
+ "ayy@a & execute "vim command" in a text file\\
+ yy@" & same thing using unnamed register\\
  u@. & execute command JUST typed in\\
- :norm qqy\$jq &  paste ``normal commands'' without entering insert mode
+ :norm qqy\$jq &  paste "normal commands" without entering insert mode
  \end{longtable}
 \end{center}
