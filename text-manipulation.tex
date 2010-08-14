@@ -40,13 +40,22 @@ Command & Description \\
 \end{center}
 
 \subsubsection{Search for declaration of subroutine/function under cursor}
-:nmap gx yiw/$\backslash$(sub$\backslash$$<$bar$>$function$\backslash$)$\backslash$s$\backslash$+$<$C-R$>$"$<$CR$>$
+\begin{verbatim}
+:nmap gx yiw/^\(sub\<bar>function\)\s\+<C-R>"<CR>
+\end{verbatim}
 
 \subsubsection{Search for visually highlighted text}
-:vmap $<$silent$>$// y/$<$C-R$>$"$<$CR$>$\\
-:vmap $<$silent$>$ //    y/$<$C-R$>$=escape(@", '$\backslash$$\backslash$/.*\^{}$\sim$[]')$<$CR$>$$<$CR$>$ (with spec chars)
+\begin{verbatim}
+:vmap // y/<C-R>"<CR>
+\end{verbatim}
+
+with spec chars
+\begin{verbatim}
+:vmap <silent> // y/<C-R>=escape(@", '\\/.*$^~[]')<CR><CR>
+\end{verbatim}
 
 \subsection{Substitution}
+
 \begin{center}
 \begin{longtable}{l|l}
  :\%s/fred/joe/igc & general substitute command\\
@@ -90,8 +99,12 @@ Command & Description \\
 \end{center}
 
 \subsubsection{Filter all form elements into paste register}
-:redir @*$|$sil exec 'g\#$<$$\backslash$(input$\backslash$$|$select$\backslash$$|$textarea$\backslash$$|$/$\backslash$=form$\backslash$)$\backslash$$>$\#p'$|$redir END \\
-:nmap ,z :redir @*sil exec 'g@$<$$\backslash$(input$\backslash$select$\backslash$textarea$\backslash$/$\backslash$=form$\backslash$)$\backslash$$>$@p'redir END
+
+\begin{verbatim}
+:redir @*|sil exec 'g#<\(input\|select\|textarea\|/\=form\)\>#p'|redir END
+:nmap ,z :redir @*<Bar>sil exec
+   \ 'g@<\(input\<Bar>select\<Bar>textarea\<Bar>/\=form\)\>@p'<Bar>redir END<CR>
+\end{verbatim}
 
 
 \subsubsection{Substitue within substituion}

@@ -81,8 +81,11 @@ nnoremap ] @l:wbd & combining a recording with a map (to end up in command mode)
  \end{enumerate}
 
 \subsection{Quick jumping between splits}
-map $<$C-J$>$ $<$C-W$>$j$<$C-W$>$\_ \\
-map $<$C-K$>$ $<$C-W$>$k$<$C-W$>$\_
+
+\begin{verbatim}
+map <C-J> <C-W>j<C-W>_
+map <C-K> <C-W>k<C-W>_
+\end{verbatim}
 
 \subsection{Visual mode basics}
 \begin{center}
@@ -112,12 +115,19 @@ set browsedir=buffer & make 'open directory' use current directory\\
 \end{center}
 
 \subsubsection{Launching IE}
-nmap ,f :update:silent !start c:$\backslash$progra$\sim$1$\backslash$intern$\sim$1$\backslash$iexplore.exe \url{file://}\%:p\\
-nmap ,i :update: !start c:$\backslash$progra$\sim$1$\backslash$intern$\sim$1$\backslash$iexplore.exe
 
-\subsubsection{Ftping from vim}
-cmap ,r :Nread \url{ftp://209.51.134.122/public}\_html/index.html\\
-cmap ,w :Nwrite \url{ftp://209.51.134.122/public}\_html/index.html
+\begin{verbatim}
+:nmap ,f :update<CR>:silent !start c:\progra~1\intern~1\iexplore.exe file://%:p<CR>
+:nmap ,i :update<CR>: !start c:\progra~1\intern~1\iexplore.exe <cWORD><CR>
+\end{verbatim}
+
+\subsubsection{FTPing from vim}
+
+\begin{verbatim}
+cmap ,r :Nread ftp://209.51.134.122/public_html/index.html
+cmap ,w :Nwrite ftp://209.51.134.122/public_html/index.html
+gvim ftp://www.somedomain.com/index.html # uses netrw.vim
+\end{verbatim}
 
 \subsubsection{Autocmd}
 \begin{center}
@@ -175,18 +185,29 @@ $<$C-R$>$=somevar           & pull contents of a variable (eg :let sray="ray[0-9
 \end{center}
 
 \subsection{Perform an action on a particular file or file type}
-autocmd VimEnter c:/intranet/note011.txt normal! ggVGg?\\
-autocmd FileType *.pl exec('set fileformats=unix')\\
 
-" Retrieving last command line command for copy \& pasting into text\\
-i:\\
-" Retrieving last Search Command for copy \& pasting into text\\
-i/\
+\begin{verbatim}
+autocmd VimEnter c:/intranet/note011.txt normal! ggVGg?
+autocmd FileType *.pl exec('set fileformats=unix')
+\end{verbatim}
+
+Retrieving last command line command for copy \& pasting into text
+\begin{verbatim}
+i<c-r>:
+\end{verbatim}
+
+Retrieving last Search Command for copy \& pasting into text
+\begin{verbatim}
+i<c-r>/
+\end{verbatim}
 
 \subsection{Inserting line number}
- :g/\^{}/exec "s/\^{}/".strpart(line(".")." ", 0, 4)\\
- :\%s/\^{}/$\backslash$=strpart(line(".")." ", 0, 5)\\
- :\%s/\^{}/$\backslash$=line('.'). ' '
+
+\begin{verbatim}
+:g/^/exec "s/^/".strpart(line(".")."    ", 0, 4)
+:%s/^/\=strpart(line(".")."     ", 0, 5)
+:%s/^/\=line('.'). ' '
+\end{verbatim}
 
 \subsection{Numbering lines}
 \begin{center}
@@ -208,15 +229,21 @@ i/\
     function! INC(increment)
         let g:I =g:I + a:increment
         return g:I
-     end function
+    end function
 \end{verbatim}
 
 \subsubsection{Create list starting from 223 incrementing by 5 between markers a,b}
-:let I=223\\
-:'a,'bs/\^{}/$\backslash$=INC(5)/
+
+\begin{verbatim}
+:let I=223
+:'a,'bs/^/\=INC(5)/
+\end{verbatim}
 
 \subsubsection{Create a map for INC}
-cab viminc :let I=223 $\backslash$$|$ 'a,'bs/\$/$\backslash$=INC(5)/
+
+\begin{verbatim}
+cab viminc :let I=223 \| 'a,'bs/$/\=INC(5)/
+\end{verbatim}
 
 \subsection{Digraphs (non alpha-numerics)}
 \begin{center}
@@ -286,11 +313,13 @@ $<$C-]$>$  & jump to function under cursor
 \end{center}
 
 \subsection{Renaming files}
- Rename files without leaving vim\\
- :r! ls *.c\\
- :\%s/$\backslash$(.*$\backslash$).c/mv \& $\backslash$1.bla\\
- :w !sh\\
- :q!
+Rename files without leaving vim
+\begin{verbatim}
+:r! ls *.c
+:%s/\(.*\).c/mv & \1.bla
+:w !sh
+:q!
+\end{verbatim}
 
 \subsection{Reproducing lines}
 \begin{center}
@@ -303,46 +332,53 @@ $<$C-]$>$  & jump to function under cursor
 \subsection[Reading MS-Word documents]
 {Reading MS-Word documents \footnote{Program required: Antiword (http://www.winfield.demon.nl)}}
 
- :autocmd BufReadPre *.doc set ro\\
- :autocmd BufReadPre *.doc set hlsearch!\\
- :autocmd BufReadPost *.doc \%!antiword "\%"
+\begin{verbatim}
+:autocmd BufReadPre *.doc set ro
+:autocmd BufReadPre *.doc set hlsearch!
+:autocmd BufReadPost *.doc %!antiword "%"
+\end{verbatim}
 
 \subsection{Random functions}
 
 \subsubsection{Save word under cursor to a file}
 
 \begin{verbatim}
-    function! SaveWord()
-        normal yiw
-        exe ':!echo '.@0.' $>$$>$ word.txt'
-    endfunction
+function! SaveWord()
+    normal yiw
+    exe ':!echo '.@0.' $>$$>$ word.txt'
+endfunction
 \end{verbatim}
 
 \subsubsection{Delete duplicate lines}
 
 \begin{verbatim}
-    function! Del()
-        if getline(".") == getline(line(".") - 1)
-            norm dd
-        endif
-    endfunction
+function! Del()
+    if getline(".") == getline(line(".") - 1)
+        norm dd
+    endif
+endfunction
 \end{verbatim}
 
 \subsubsection{Columnise a CSV file for display}
-:let width = 20\\
-:let fill=' ' $|$ while strlen(fill) $<$ width $|$ let fill=fill.fill $|$ endwhile\\
-:\%s/$\backslash$([\^{};]*$\backslash$);$\backslash$=/$\backslash$=strpart(submatch(1).fill, 0, width)/ge\\
-:\%s/$\backslash$s$\backslash$+\$//ge
 
 \begin{verbatim}
-    function! CSVH(x)
-        execute 'match Keyword /\^{}$\backslash$([\^{},]*,$\backslash$)$\backslash$\{'.a:x.'\}$\backslash$zs[\^{},]*/'
-        execute 'normal \^{}'.a:x.'f,'
-    endfunction
+:let width = 20
+:let fill=' ' | while strlen(fill) < width | let fill=fill.fill | endwhile
+:%s/\([^;]*\);\=/\=strpart(submatch(1).fill, 0, width)/ge
+:%s/\s\+$//ge
 \end{verbatim}
 
-command! -nargs=1 Csv :call CSVH()\\
-:Csv 5 : highlight fifth column
+\subsubsection{Highlight a particular csv column}
+
+\begin{verbatim}
+function! CSVH(x)
+    execute 'match Keyword /^\([^,]*,\)\{'.a:x.'}\zs[^,]*/'
+    execute 'normal ^'.a:x.'f,'
+endfunction
+command! -nargs=1 Csv :call CSVH(<args>)
+\end{verbatim}
+
+Call with \verb!:Csv 5! to highlight fifth column
 
 \subsection{Miscallaenous commands}
 \begin{center}

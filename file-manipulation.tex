@@ -106,9 +106,11 @@
 \end{center}
 
 \subsubsection{Creating your own GUI Toolbar entry}
-amenu Modeline.Insert$\backslash$ at$\backslash$ VIMt$\backslash$ modeline $<$Esc$>$$<$Esc$>$ggOvim:ff=unix ts=4 ss=4\\
-$<$CR$>$vim60:fdm=marker$<$Esc$>$gg\\\\
-(All on one line!)
+
+\begin{verbatim}
+amenu  Modeline.Insert\ a\ VIM\ modeline
+       \ <esc><esc>ggOvim:ff=unix ts=4 ss=4<CR>vim60:fdm=marker<esc>gg
+\end{verbatim}
 
 \subsection{Markers \& moving about}
 \begin{center}
@@ -164,4 +166,7 @@ iab phpdb exit("$<$hr$>$Debug $<$C-R$>$a  "); & yank all variables into register
 \end{center}
 
 \subsubsection{Display RGB colour under the cursor eg \#445588}
-:nmap $<$leader$>$c :hi Normal guibg=\#$<$c-r$>$=expand("$<$cword$>$")$<$cr$>$$<$cr$>$
+
+\begin{verbatim}
+:nmap <leader>c :hi Normal guibg=#<c-r>=expand("<cword>")<cr><cr>
+\end{verbatim}
